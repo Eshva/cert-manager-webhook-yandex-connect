@@ -1,0 +1,6 @@
+{
+  "pddTokenSecretRef": {
+    "name": "yandex-connect-pdd-token",
+    "key": "pdd-token"
+  }
+}
