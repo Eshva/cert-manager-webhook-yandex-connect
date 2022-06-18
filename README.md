@@ -65,7 +65,7 @@ This webhook has been tested with [cert-manager] v1.5.4 and Kubernetes v1.22.2 o
 
 3. Create the secret to keep the Yandex.Connect PDD Token in the cert-manager namespace:
 
-        kubectl create secret generic yandex-connect-pdd-token \
+        kubectl create secret generic yandex-connect-credentials \
             --namespace cert-manager --from-literal=pdd-token='<PDD-TOKEN>'
 
    *The `Secret` must reside in the same namespace as `cert-manager`.*
