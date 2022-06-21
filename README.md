@@ -45,7 +45,7 @@ This webhook has been tested with [cert-manager] v1.8.0 and Kubernetes v1.23.6 o
             --namespace cert-manager \
             --create-namespace \
             --set installCRDs=true \
-            --version v1.5.4 \
+            --version v1.8.0 \
             --set 'extraArgs={--dns01-recursive-nameservers=8.8.8.8:53\,1.1.1.1:53}'
 
         kubectl get pods --namespace cert-manager --watch
@@ -59,7 +59,7 @@ This webhook has been tested with [cert-manager] v1.8.0 and Kubernetes v1.23.6 o
    Example output:
 
             NAME                    CHART VERSION   APP VERSION     DESCRIPTION
-            jetstack/cert-manager   v1.5.4          v1.5.4          A Helm chart for cert-manager
+            jetstack/cert-manager   v1.8.0          v1.8.0          A Helm chart for cert-manager
 
    Check the state and ensure that all pods are running fine (watch out for any issues regarding the `cert-manager-webhook-` pod and its volume mounts):
 
@@ -79,7 +79,7 @@ This webhook has been tested with [cert-manager] v1.8.0 and Kubernetes v1.23.6 o
 
    *The `features.apiPriorityAndFairness` argument must be removed or set to `false` for Kubernetes older than 1.20.*
 
-        helm install cert-manager-webhook-yandex-connect \
+        helm install cert-manager-webhook-yandex-connect cert-manager-webhook-yandex-connect \
             --namespace cert-manager \
             --set features.apiPriorityAndFairness=true \
             --set image.repository=cert-manager-webhook-yandex-connect \
@@ -89,7 +89,7 @@ This webhook has been tested with [cert-manager] v1.8.0 and Kubernetes v1.23.6 o
 
    To deploy using the image from Docker Hub (for example using the `0.2.1` tag):
 
-        helm install cert-manager-webhook-yandex-connect \
+        helm install cert-manager-webhook-yandex-connect cert-manager-webhook-yandex-connect \
             --namespace cert-manager \
             --set features.apiPriorityAndFairness=true \
             --set image.tag=0.2.1 \
@@ -98,7 +98,7 @@ This webhook has been tested with [cert-manager] v1.8.0 and Kubernetes v1.23.6 o
 
    To deploy using the Helm repository (for example using the `v0.2.1` version):
 
-        helm install cert-manager-webhook-yandex-connect \
+        helm install cert-manager-webhook-yandex-connect cert-manager-webhook-yandex-connect \
             --repo https://eshva.github.io/cert-manager-webhook-yandex-connect \
             --version v0.2.1 \
             --namespace cert-manager \
