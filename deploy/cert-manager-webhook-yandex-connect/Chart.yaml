@@ -1,4 +1,15 @@
 apiVersion: v2
-description: A Helm chart for cert-manager-webhook-yandex-connect
 name: cert-manager-webhook-yandex-connect
 version: v0.2.1
+appVersion: v0.2.1
+home: https://github.com/Eshva/cert-manager-webhook-yandex-connect/
+description: "A cert-manager webhook for creating an ACME DNS01 solver webhook for Yandex.Connect DNS"
+keywords:
+  - cert-manager
+  - dns01
+  - acme
+  - lets-encrypt
+maintainers:
+  - name: Mike Eshva
+    email: reg@eshva.ru
+    url: https://github.com/Eshva/
