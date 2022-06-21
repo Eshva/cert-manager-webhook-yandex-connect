@@ -14,7 +14,7 @@ jobs:
       go_version: ${{ steps.get_versions.outputs.go_version }}
       build_version: ${{ steps.get_versions.outputs.build_version }}
       chart_version: ${{ steps.get_versions.outputs.chart_version }}
-      go_updated: true # ${{ steps.file_updates.outputs.go }}
+      go_updated: ${{ steps.file_updates.outputs.go }}
       yaml_updated: ${{ steps.file_updates.outputs.yaml }}
 
     steps:
