@@ -212,8 +212,8 @@ func (solver *yandexConnectDNSProviderSolver) getPddToken(config *yandexConnectD
 		return nil, fmt.Errorf("unable to get secret `%s`; %v", secretName, error)
 	}
 
-	secretContent, ok := secret.Data[config.PddTokenSecretRef.Key]
-	if !ok {
+	secretContent, isFound := secret.Data[config.PddTokenSecretRef.Key]
+	if !isFound {
 		return nil, fmt.Errorf("key %q not found in secret \"%s/%s\"", config.PddTokenSecretRef.Key,
 			config.PddTokenSecretRef.LocalObjectReference.Name, namespace)
 	}
