@@ -91,8 +91,7 @@ func (yandexConnectClient *YandexConnectClient) CreateTxtRecord(domain *string, 
 	json.Unmarshal(data, &response)
 
 	if response.Success == "error" {
-		// TODO: Translate error code into error message.
-		return fmt.Errorf("add DNS-record request for domain %s failed with error: '%s'", *domain, response.Error)
+		return fmt.Errorf("add DNS-record request for domain %s failed with error: '%s'", *domain, explainApiError(response.Error))
 	}
 
 	return nil
@@ -122,8 +121,7 @@ func (yandexConnectClient *YandexConnectClient) UpdateTxtRecord(domain *string, 
 	json.Unmarshal(data, &response)
 
 	if response.Success == "error" {
-		// TODO: Translate error code into error message.
-		return fmt.Errorf("update DNS-record request for domain %s failed with error: '%s'", *domain, response.Error)
+		return fmt.Errorf("update DNS-record request for domain %s failed with error: '%s'", *domain, explainApiError(response.Error))
 	}
 
 	return nil
@@ -153,8 +151,7 @@ func (yandexConnectClient *YandexConnectClient) DeleteTxtRecord(domain *string, 
 	json.Unmarshal(data, &response)
 
 	if response.Success == "error" {
-		// TODO: Translate error code into error message.
-		return fmt.Errorf("delete DNS-record request for domain %s failed with error: '%s'", *domain, response.Error)
+		return fmt.Errorf("delete DNS-record request for domain %s failed with error: '%s'", *domain, explainApiError(response.Error))
 	}
 
 	return nil
@@ -209,8 +206,7 @@ func (yandexConnectClient *YandexConnectClient) getTextRecord(domain *string, na
 
 	// API response always 200 OK even for fails.
 	if response.Success == "error" {
-		// TODO: Translate error code into error message.
-		return nil, fmt.Errorf("list DNS-records request for domain %s failed with error: '%s'", *domain, response.Error)
+		return nil, fmt.Errorf("list DNS-records request for domain %s failed with error: '%s'", *domain, explainApiError(response.Error))
 	}
 
 	for _, record := range response.Records {
@@ -220,4 +216,37 @@ func (yandexConnectClient *YandexConnectClient) getTextRecord(domain *string, na
 	}
 
 	return nil, nil
+}
+
+func explainApiError(errorCode string) string {
+	switch errorCode {
+	case "unknown":
+		return "Temporary API error. Repeat later."
+	case "no_token":
+		return "Required token parameter is not specified."
+	case "no_domain":
+		return "Required domain parameter is not specified."
+	case "no_ip":
+		return "Required ip parameter is not specified."
+	case "bad_domain":
+		return "Bad domain specified."
+	case "prohibited":
+		return "Forbidden domain name specified."
+	case "bad_token":
+		return "Wrong or unknown PDD token specified."
+	case "no_auth":
+		return "No PDD token specified. Set it in the PddToken header."
+	case "not_allowed":
+		return "The user has no right to perform requested action."
+	case "blocked":
+		return "The domain is blocked."
+	case "occupied":
+		return "The domain occupied by another user."
+	case "domain_limit_reached":
+		return "The domain limit number (50) for a free user is reached."
+	case "no_reply":
+		return "The source server for import operation is not reachable."
+	default:
+		return errorCode
+	}
 }

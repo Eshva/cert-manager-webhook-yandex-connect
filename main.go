@@ -23,7 +23,7 @@ var GroupName = os.Getenv("GROUP_NAME")
 
 func main() {
 	if GroupName == "" {
-		panic("GROUP_NAME must be specified")
+		panic("You must specify the webhook group name in (Cluster)Issuer resource's .spec.acme.solvers[dns01].webhook.groupName setting.")
 	}
 
 	// This will register our Yandex.Connect DNS provider with the webhook serving
