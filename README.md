@@ -5,6 +5,9 @@ Quoting the [ACME DNS-01 challenge]:
 
 > This challenge asks you to prove that you control the DNS for your domain name by putting a specific value in a TXT record under that domain name. It is harder to configure than HTTP-01, but can work in scenarios that HTTP-01 can’t. It also allows you to issue wildcard certificates. After Let’s Encrypt gives your ACME client a token, your client will create a TXT record derived from that token and your account key, and put that record at _acme-challenge.<YOUR_DOMAIN>. Then Let’s Encrypt will query the DNS system for that record. If it finds a match, you can proceed to issue a certificate!
 
+[Yandex.Connect] is a Russian free DNS (among others) service. It has [API to manage DNS records](https://yandex.ru/dev/pdd/doc/concepts/api-dns.html). This project is an adaptation of another similar project [ACME webhook for Gandi]. To use this service you need to get so called PDD Token following a link 'странице управления токеном' on [this page](https://yandex.ru/dev/pdd/doc/concepts/access.html). The PDD Token should be stored in a Kubernetes secret named `yandex-connect-credentials`. If you want to issue a wildcard certificate I recommend to store it in `cert-manager` namespace and give other namespaces rights to access it on read.
+
+It's my first experience in Golang.
 
 ## Building
 Build the container image `cert-manager-webhook-yandex-connect:latest`:
@@ -23,7 +26,7 @@ Refer to the [CHANGELOG](CHANGELOG.md) file.
 
 
 ## Compatibility
-This webhook has been tested with [cert-manager] v1.5.4 and Kubernetes v1.22.2 on `amd64`. In theory it should work on other hardware platforms as well but no steps have been taken to verify this. Please drop me a note if you had success.
+This webhook has been tested with [cert-manager] v1.8.0 and Kubernetes v1.23.6 on `amd64`. In theory it should work on other hardware platforms as well but no steps have been taken to verify this. Please drop me a note if you had success.
 
 
 ## Testing with Minikube
@@ -68,7 +71,8 @@ This webhook has been tested with [cert-manager] v1.5.4 and Kubernetes v1.22.2 o
         kubectl create secret generic yandex-connect-credentials \
             --namespace cert-manager --from-literal=pdd-token='<PDD-TOKEN>'
 
-   *The `Secret` must reside in the same namespace as `cert-manager`.*
+   > :warning: *The `Secret` must reside in the same namespace as `cert-manager`.*
+   > :warning: *The `Secret` must be named `yandex-connect-credentials`.*
 
 4. Deploy this webhook (add `--dry-run` to try it and `--debug` to inspect the rendered manifests; Set `logLevel` to 6 for verbose logs):
 
@@ -194,6 +198,7 @@ make clean
 
 [ACME DNS-01 challenge]: https://letsencrypt.org/docs/challenge-types/#dns-01-challenge
 [ACME documentation]: https://cert-manager.io/docs/configuration/acme/
+[ACME webhook for Gandi]: https://github.com/bwolf/cert-manager-webhook-gandi
 [Certificate]: https://cert-manager.io/docs/usage/certificate/
 [cert-manager]: https://cert-manager.io/
 [Yandex.Connect]: https://connect.yandex.ru/
