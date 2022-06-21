@@ -1,9 +1,9 @@
 apiVersion: v2
 name: cert-manager-webhook-yandex-connect
-version: v0.2.1
+version: refs/heads/master
 appVersion: v0.2.1
 home: https://github.com/Eshva/cert-manager-webhook-yandex-connect/
-description: "A cert-manager webhook for creating an ACME DNS01 solver webhook for Yandex.Connect DNS"
+description: A cert-manager webhook for creating an ACME DNS01 solver webhook for Yandex.Connect DNS
 keywords:
   - cert-manager
   - dns01
