@@ -5,7 +5,7 @@ certManager:
   serviceAccountName: cert-manager
 image:
   repository: mikeeshva/cert-manager-webhook-yandex-connect
-  tag: 0.2.1
+  tag: 0.2.0
   pullPolicy: IfNotPresent
 nameOverride: ''
 fullnameOverride: ''
