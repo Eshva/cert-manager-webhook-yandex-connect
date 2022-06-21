@@ -17,8 +17,7 @@ import (
 	"k8s.io/klog/v2"
 )
 
-// TODO: Do we need it????????
-const YandexConnectMinTtl = 300 // Yandex.Connect reports an error for values < this value
+const DnsRecordTtl = 300
 
 var GroupName = os.Getenv("GROUP_NAME")
 
@@ -105,12 +104,12 @@ func (solver *yandexConnectDNSProviderSolver) Present(challengeRequest *v1alpha1
 	}
 
 	if isRecordPresent {
-		error := yandexConnectClient.UpdateTxtRecord(&domain, &entry, &challengeRequest.Key, YandexConnectMinTtl)
+		error := yandexConnectClient.UpdateTxtRecord(&domain, &entry, &challengeRequest.Key, DnsRecordTtl)
 		if error != nil {
 			return fmt.Errorf("unable to change TXT record: %v", error)
 		}
 	} else {
-		error := yandexConnectClient.CreateTxtRecord(&domain, &entry, &challengeRequest.Key, YandexConnectMinTtl)
+		error := yandexConnectClient.CreateTxtRecord(&domain, &entry, &challengeRequest.Key, DnsRecordTtl)
 		if error != nil {
 			return fmt.Errorf("unable to create TXT record: %v", error)
 		}
