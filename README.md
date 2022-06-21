@@ -186,7 +186,7 @@ This webhook has been tested with [cert-manager] v1.8.0 and Kubernetes v1.23.6 o
 ## Conformance test
 Please note that the test is not a typical unit or integration test. Instead it invokes the web hook in a Kubernetes-like environment which asks the web hook to really call the DNS provider (.i.e. Yandex.Connect). It attempts to create an `TXT` entry like `cert-manager-dns01-tests.example.com`, verifies the presence of the entry via Google DNS. Finally it removes the entry by calling the cleanup method of web hook.
 
-As said above, the conformance test is run against the real Yandex.Connect API. Therefore you *must* have a Yandex.Connect account, a domain and an API key.
+As said above, the conformance test is run against the real Yandex.Connect API. Therefore you *must* have a Yandex.Connect account, a domain and an PDD Token.
 
 ``` shell
 cp testdata/yandex-connect/ppd-token.yaml.sample testdata/yandex-connect/pdd-token.yaml
