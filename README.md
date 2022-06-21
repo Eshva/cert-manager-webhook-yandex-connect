@@ -72,7 +72,7 @@ This webhook has been tested with [cert-manager] v1.8.0 and Kubernetes v1.23.6 o
             --namespace cert-manager --from-literal=pdd-token='<PDD-TOKEN>'
 
    > :warning: *The `Secret` must reside in the same namespace as `cert-manager`.*
-   
+
    > :warning: *The `Secret` must be named `yandex-connect-credentials`.*
 
 4. Deploy this webhook (add `--dry-run` to try it and `--debug` to inspect the rendered manifests; Set `logLevel` to 6 for verbose logs):
@@ -87,20 +87,20 @@ This webhook has been tested with [cert-manager] v1.8.0 and Kubernetes v1.23.6 o
             --set logLevel=2 \
             ./deploy/cert-manager-webhook-yandex-connect
 
-   To deploy using the image from Docker Hub (for example using the `0.2.0` tag):
+   To deploy using the image from Docker Hub (for example using the `0.2.1` tag):
 
         helm install cert-manager-webhook-yandex-connect \
             --namespace cert-manager \
             --set features.apiPriorityAndFairness=true \
-            --set image.tag=0.2.0 \
+            --set image.tag=0.2.1 \
             --set logLevel=2 \
             ./deploy/cert-manager-webhook-yandex-connect
 
-   To deploy using the Helm repository (for example using the `v0.2.0` version):
+   To deploy using the Helm repository (for example using the `v0.2.1` version):
 
         helm install cert-manager-webhook-yandex-connect \
             --repo https://eshva.github.io/cert-manager-webhook-yandex-connect \
-            --version v0.2.0 \
+            --version v0.2.1 \
             --namespace cert-manager \
             --set features.apiPriorityAndFairness=true \
             --set logLevel=2
