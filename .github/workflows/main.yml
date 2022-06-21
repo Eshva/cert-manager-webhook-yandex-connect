@@ -148,7 +148,6 @@ jobs:
           git config user.email github-actions@github.com
 
       - name: Update Helm chart version
-        if: needs.base.outputs.build_version != ''
         uses: fjogeleit/yaml-update-action@master
         with:
           valueFile: 'deploy/cert-manager-webhook-yandex-connect/Chart.yaml'
