@@ -72,6 +72,7 @@ This webhook has been tested with [cert-manager] v1.8.0 and Kubernetes v1.23.6 o
             --namespace cert-manager --from-literal=pdd-token='<PDD-TOKEN>'
 
    > :warning: *The `Secret` must reside in the same namespace as `cert-manager`.*
+   
    > :warning: *The `Secret` must be named `yandex-connect-credentials`.*
 
 4. Deploy this webhook (add `--dry-run` to try it and `--debug` to inspect the rendered manifests; Set `logLevel` to 6 for verbose logs):
