@@ -10,7 +10,7 @@ endif
 GO_VERSION ?= $(shell go mod edit -json | grep -${GREP_PREGEX_FLAG}o '"Go":\s+"([0-9.]+)"' | sed -E 's/.+"([0-9.]+)"/\1/')
 
 IMAGE_NAME := mikeeshva/cert-manager-webhook-yandex-connect
-IMAGE_TAG := 0.1.0
+IMAGE_TAG := 0.2.0
 
 OUT := $(shell pwd)/_out
 
